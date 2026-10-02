@@ -1,0 +1,122 @@
+[
+ {
+  "symbol": "MSFT",
+  "name": "Microsoft Corp",
+  "asset_class": "Equity",
+  "sector": "Technology"
+ },
+ {
+  "symbol": "AAPL",
+  "name": "Apple Inc",
+  "asset_class": "Equity",
+  "sector": "Technology"
+ },
+ {
+  "symbol": "NVDA",
+  "name": "NVIDIA Corp",
+  "asset_class": "Equity",
+  "sector": "Technology"
+ },
+ {
+  "symbol": "AMZN",
+  "name": "Amazon.com Inc",
+  "asset_class": "Equity",
+  "sector": "Consumer"
+ },
+ {
+  "symbol": "JPM",
+  "name": "JPMorgan Chase",
+  "asset_class": "Equity",
+  "sector": "Financials"
+ },
+ {
+  "symbol": "GS",
+  "name": "Goldman Sachs",
+  "asset_class": "Equity",
+  "sector": "Financials"
+ },
+ {
+  "symbol": "XOM",
+  "name": "Exxon Mobil",
+  "asset_class": "Equity",
+  "sector": "Energy"
+ },
+ {
+  "symbol": "JNJ",
+  "name": "Johnson & Johnson",
+  "asset_class": "Equity",
+  "sector": "Healthcare"
+ },
+ {
+  "symbol": "UNH",
+  "name": "UnitedHealth Group",
+  "asset_class": "Equity",
+  "sector": "Healthcare"
+ },
+ {
+  "symbol": "NESN",
+  "name": "Nestle SA",
+  "asset_class": "Equity",
+  "sector": "Consumer Staples"
+ },
+ {
+  "symbol": "ASML",
+  "name": "ASML Holding",
+  "asset_class": "Equity",
+  "sector": "Technology"
+ },
+ {
+  "symbol": "TSM",
+  "name": "Taiwan Semiconductor",
+  "asset_class": "Equity",
+  "sector": "Technology"
+ },
+ {
+  "symbol": "UST10",
+  "name": "US Treasury 10Y",
+  "asset_class": "Fixed Income",
+  "sector": "Government"
+ },
+ {
+  "symbol": "UST2",
+  "name": "US Treasury 2Y",
+  "asset_class": "Fixed Income",
+  "sector": "Government"
+ },
+ {
+  "symbol": "IGCORP",
+  "name": "IG Corporate Bond ETF",
+  "asset_class": "Fixed Income",
+  "sector": "Credit"
+ },
+ {
+  "symbol": "HYBOND",
+  "name": "High Yield Bond ETF",
+  "asset_class": "Fixed Income",
+  "sector": "Credit"
+ },
+ {
+  "symbol": "GOLD",
+  "name": "Gold ETF",
+  "asset_class": "Commodity",
+  "sector": "Precious Metals"
+ },
+ {
+  "symbol": "REIT",
+  "name": "Global REIT Index",
+  "asset_class": "Real Estate",
+  "sector": "REIT"
+ },
+ {
+  "symbol": "EMEQ",
+  "name": "Emerging Markets Equity ETF",
+  "asset_class": "Equity",
+  "sector": "Emerging Markets"
+ },
+ {
+  "symbol": "PE-FUND",
+  "name": "Private Equity Fund IV",
+  "asset_class": "Alternatives",
+  "sector": "Private Equity"
+ }
+]

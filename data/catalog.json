@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-09-30",
+  "sources": [
+    {
+      "id": "core_banking",
+      "name": "Core Banking System",
+      "type": "SQLite (OLTP)",
+      "path": "core_banking/core_banking.db",
+      "tables": [
+        "customers",
+        "accounts",
+        "transactions",
+        "loans"
+      ],
+      "refresh": "Real-time CDC",
+      "mcp_server": "core_banking"
+    },
+    {
+      "id": "crm",
+      "name": "CRM Platform",
+      "type": "JSON export",
+      "path": "crm/",
+      "tables": [
+        "crm_interactions.json",
+        "nps_survey.json"
+      ],
+      "refresh": "Nightly batch",
+      "mcp_server": "core_banking"
+    },
+    {
+      "id": "wealth",
+      "name": "Wealth Platform",
+      "type": "SQLite",
+      "path": "wealth/wealth.db",
+      "tables": [
+        "portfolios",
+        "holdings"
+      ],
+      "refresh": "Hourly",
+      "mcp_server": "wealth_markets"
+    },
+    {
+      "id": "market_data",
+      "name": "Market Data Feed",
+      "type": "CSV + JSON feed",
+      "path": "market_data/",
+      "tables": [
+        "daily_prices.csv",
+        "securities.json"
+      ],
+      "refresh": "End of day",
+      "mcp_server": "wealth_markets"
+    },
+    {
+      "id": "risk_compliance",
+      "name": "Risk & Compliance Hub",
+      "type": "SQLite + documents",
+      "path": "risk_compliance/",
+      "tables": [
+        "aml_alerts",
+        "credit_risk",
+        "compliance_findings",
+        "policies/*.md"
+      ],
+      "refresh": "Intra-day",
+      "mcp_server": "risk_compliance"
+    },
+    {
+      "id": "warehouse",
+      "name": "Enterprise Data Warehouse",
+      "type": "SQLite (OLAP)",
+      "path": "warehouse/enterprise_dw.db",
+      "tables": [
+        "kpi_monthly",
+        "digital_engagement"
+      ],
+      "refresh": "Monthly close",
+      "mcp_server": "analytics"
+    },
+    {
+      "id": "tokenops",
+      "name": "TokenOps Control Plane Ledger",
+      "type": "SQLite (control plane)",
+      "path": "tokenops/control_plane.db",
+      "tables": [
+        "runs",
+        "budgets",
+        "policy_instances",
+        "ledger_spent"
+      ],
+      "refresh": "Real-time",
+      "mcp_server": null
+    }
+  ]
+}

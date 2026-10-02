@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# TokenOps sample governance policy for the FinSight AI agent.
+# Pushed to the control plane on app start-up (POST /v1/admin/reseed-governance).
+# Money is in micro-USD: $1.00 == 1_000_000.
+# ---------------------------------------------------------------------------
+governance:
+  budgets:
+    # Hard cap on LLM spend for every single agent run (one user question).
+    - id: run_llm_cap
+      limit_micros: 250000        # $0.25 per run
+      dimension: run
+      period: lifetime
+
+  policies:
+    # Guarantee: halt the run once actual spend exhausts the run budget.
+    cost_budget:
+      budget: run_llm_cap
+    # Prevention: refuse a call whose worst case (input + capped output) cannot fit.
+    # 4000 leaves headroom for GPT-5 reasoning tokens (they count toward the output cap).
+    pre_call_worst_case:
+      budget: run_llm_cap
+      default_max_output: 4000
+    # Soft steer: at 80% of the budget, downgrade to the mini deployment.
+    # downgrade_to is filled in from AZURE_OPENAI_MINI_DEPLOYMENT at start-up.
+    cost_guard:
+      budget: run_llm_cap
+      threshold: 0.8
+      mode: downgrade
+    # Loop guard: max LLM + tool boundary crossings per run.
+    step_cap:
+      max_steps: 30
+    # Max concurrent LLM calls per run.
+    concurrency_cap:
+      max_concurrent: 4
+      mode: reject
+    # Hallucinated tool names -> synthetic error, halt after k repeats.
+    # registry is replaced with the tool names discovered from the MCP servers.
+    tool_fix:
+      registry: []
+      k: 3
+    # Flag oversized tool outputs (token-bloat protection).
+    tool_output_cap:
+      cap_tokens: 6000
+    # Detect the agent repeating the same tool call without progress.
+    progress_guard:
+      window: 6
+      repeats: 3
+      max_corrections: 2
+    # Compact the prompt when the context grows too large.
+    context_compaction:
+      ctx_max: 60000
+      has_hook: false
+    # Detect degenerate/repetitive model output.
+    output_runaway:
+      repeats: 4
+      max_retries: 2

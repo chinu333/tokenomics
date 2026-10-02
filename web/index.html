@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FinSight · Agentic Intelligence governed by TokenOps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header glass" id="header">
+    <div class="brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#818cf8" /><stop offset=".5" stop-color="#c084fc" /><stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="36" height="36" rx="11" fill="none" stroke="url(#lg)" stroke-width="2.2" />
+          <path d="M11 27 L17 19 L22 23 L29 12" fill="none" stroke="url(#lg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="29" cy="12" r="2.6" fill="url(#lg)" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1 class="brand-name">FinSight</h1>
+        <span class="brand-sub">Agentic Intelligence · Governed by TokenOps</span>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="nav-btn active" data-page="dashboard"><span>Executive</span></button>
+      <button class="nav-btn" data-page="analytics"><span>Analytics</span></button>
+      <button class="nav-btn" data-page="agent"><span>AI Analyst</span></button>
+      <button class="nav-btn" data-page="governance"><span>TokenOps</span></button>
+      <button class="nav-btn" data-page="proof"><span>Budget Proof</span></button>
+      <button class="nav-btn" data-page="evals"><span>Evaluation Lab</span></button>
+      <button class="nav-btn" data-page="data"><span>Data &amp; MCP</span></button>
+      <button class="nav-btn" data-page="pitch"><span>Pitch</span></button>
+      <div class="nav-indicator" id="navIndicator"></div>
+    </nav>
+
+    <div class="header-right">
+      <div class="status-pills" id="statusPills"></div>
+      <button class="theme-toggle annot-hdr" type="button" data-annot-toggle aria-pressed="false" title="Annotate anything on screen (A)" aria-label="Toggle annotation">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8 4 20zM14 6.6l3.4 3.4"/></svg>
+      </button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light / dark theme" aria-label="Toggle theme">
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></g></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= EXECUTIVE DASHBOARD ================= -->
+    <section class="page active" id="page-dashboard">
+      <div class="exec-layout">
+        <div class="exec-main">
+          <div class="hero">
+            <div class="hero-title">
+              <h2 class="page-title">Executive Command Center</h2>
+              <p class="page-sub">Enterprise performance, risk and AI-cost posture · <span id="asOf">loading…</span></p>
+            </div>
+          </div>
+
+          <div class="kpi-grid" id="kpiGrid"></div>
+
+          <div class="row g-3-1 grow">
+            <div class="card glass reveal">
+              <div class="card-head"><h3>Revenue &amp; Net Income</h3><small>Monthly · 36 months · all business lines</small></div>
+              <div class="chart-box"><canvas id="chTrend"></canvas></div>
+            </div>
+            <div class="card glass reveal">
+              <div class="card-head"><h3>Revenue Mix</h3><small>Trailing 12 months</small></div>
+              <div class="chart-box"><canvas id="chMix"></canvas></div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="card glass reveal">
+              <div class="card-head"><h3>Regional Performance</h3><small>TTM revenue vs net income</small></div>
+              <div class="chart-box"><canvas id="chRegion"></canvas></div>
+            </div>
+            <div class="card glass reveal">
+              <div class="card-head"><h3>Risk &amp; Compliance</h3><small>Live from Risk Hub</small></div>
+              <div class="tiles scroll" id="riskTiles"></div>
+            </div>
+            <div class="card glass reveal">
+              <div class="card-head"><h3>AI Cost Governance</h3><small>TokenOps</small>
+                <button class="btn small" data-goto="governance"><span>Console →</span></button>
+              </div>
+              <div class="tiles scroll" id="aiTiles"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card glass ask-rail reveal" id="askRail">
+          <div class="card-head">
+            <h3>Ask FinSight</h3>
+            <small>LangGraph agent · live MCP data</small>
+            <div class="head-actions">
+              <button class="icon-btn" id="railClear" type="button" title="New conversation" aria-label="New conversation"><span>↺</span></button>
+              <button class="icon-btn" data-goto="agent" type="button" title="Open the full AI Analyst workspace" aria-label="Open AI Analyst"><span>↗</span></button>
+            </div>
+          </div>
+          <div class="rail-controls">
+            <select id="railPersona" aria-label="Persona">
+              <option>CEO</option><option>CFO</option><option>CRO</option><option>COO</option><option>CMO</option><option>Head of Wealth</option>
+            </select>
+            <button class="btn small mode-btn" id="railMode" type="button" title="TokenOps governance mode - click to toggle Enforce / Preview"><span>Enforce</span></button>
+          </div>
+          <div class="rail-meter">
+            <div class="meter"><i id="railMeterBar"></i></div>
+            <small id="railMeterLbl">per-run budget —</small>
+          </div>
+          <div class="rail-body" id="railMessages"></div>
+          <ol class="timeline rail-trace" id="railTrace"></ol>
+          <div class="rail-pins" id="railPins" hidden>
+            <small>Pinned questions</small>
+            <div class="chips small" id="railPinChips"></div>
+          </div>
+          <form class="composer compact" id="railComposer">
+            <textarea id="railQuestion" rows="2" maxlength="2000" placeholder="Ask about performance, risk, customers…"></textarea>
+            <button class="btn primary" id="railSend" type="submit"><span>Ask</span></button>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= ANALYTICS ================= -->
+    <section class="page" id="page-analytics">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">Business Analytics</h2>
+          <p class="page-sub">Drill-downs across lines of business, channels, credit, markets and customers</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="card glass reveal span-2"><div class="card-head"><h3>Revenue by Business Line</h3><small>Monthly, stacked</small></div><div class="chart-box"><canvas id="chBL"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Digital Active Users</h3><small>By channel</small></div><div class="chart-box"><canvas id="chDigital"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Market Performance</h3><small>1-year total return</small></div><div class="chart-box"><canvas id="chMarket"></canvas></div></div>
+      </div>
+      <div class="row g-4">
+        <div class="card glass reveal"><div class="card-head"><h3>Transaction Channels</h3><small>Last 90 days · value</small></div><div class="chart-box"><canvas id="chChannels"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Loan Book Health</h3><small>Outstanding by status</small></div><div class="chart-box"><canvas id="chLoans"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Credit Ratings</h3><small>EAD vs expected loss</small></div><div class="chart-box"><canvas id="chRatings"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>AML Alert Scenarios</h3><small>Alert count</small></div><div class="chart-box"><canvas id="chAml"></canvas></div></div>
+      </div>
+      <div class="row g-4">
+        <div class="card glass reveal"><div class="card-head"><h3>Portfolio Strategies</h3><small>YTD vs benchmark</small></div><div class="chart-box"><canvas id="chStrat"></canvas></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Customer Sentiment</h3><small>CRM by channel</small></div><div class="chart-box"><canvas id="chSent"></canvas></div></div>
+        <div class="card glass reveal span-2"><div class="card-head"><h3>Customer Segments</h3><small>Customers &amp; avg income</small></div><div class="chart-box"><canvas id="chSeg"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- ================= AI ANALYST ================= -->
+    <section class="page" id="page-agent">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">AI Analyst</h2>
+          <p class="page-sub">LangGraph agent · MCP tool discovery · Azure OpenAI (Entra ID) · every call governed by TokenOps</p>
+        </div>
+      </div>
+      <div class="agent-layout">
+        <div class="card glass chat-card">
+          <div class="chat-controls">
+            <label class="field"><small>Persona</small>
+              <select id="persona">
+                <option>CEO</option><option>CFO</option><option>CRO</option><option>COO</option><option>CMO</option><option>Head of Wealth</option>
+              </select>
+            </label>
+            <label class="field"><small>Department</small>
+              <select id="department">
+                <option>Executive Office</option><option>Finance</option><option>Risk</option><option>Operations</option><option>Marketing</option><option>Wealth</option>
+              </select>
+            </label>
+            <div class="field"><small>Governance mode</small>
+              <div class="segmented" id="modeToggle">
+                <button data-mode="enforce" class="active"><span>Enforce</span></button>
+                <button data-mode="preview"><span>Preview</span></button>
+                <div class="seg-thumb"></div>
+              </div>
+            </div>
+          </div>
+          <div class="messages" id="messages">
+            <div class="msg system">
+              <div class="bubble">
+                <p><strong>Hi, I'm FinSight.</strong> Ask me anything about the bank - performance, risk, customers, wealth or markets.
+                I'll discover tools from the MCP servers, pull live data and stay inside the per-run AI budget set in TokenOps.</p>
+              </div>
+            </div>
+          </div>
+          <div class="chips small" id="agentPrompts"></div>
+          <form class="composer" id="composer">
+            <textarea id="question" rows="2" maxlength="2000" placeholder="e.g. Give me a board-ready summary of Q3 performance and the top 3 risks…"></textarea>
+            <button class="btn primary" id="sendBtn" type="submit"><span>Run</span></button>
+          </form>
+        </div>
+
+        <div class="telemetry">
+          <div class="card glass">
+            <div class="card-head"><h3>Run Budget</h3><small id="runIdLbl">no run yet</small></div>
+            <div class="gauge-wrap">
+              <canvas id="chGauge"></canvas>
+              <div class="gauge-center">
+                <span class="gauge-val" id="gaugeVal">$0.0000</span>
+                <small id="gaugeCap">of $— per run</small>
+              </div>
+            </div>
+            <div class="mini-stats">
+              <div><small>Model</small><span id="tModel">—</span></div>
+              <div><small>LLM calls</small><span id="tLlm">0</span></div>
+              <div><small>MCP tool calls</small><span id="tTools">0</span></div>
+              <div><small>Tokens in / out</small><span id="tTok">0 / 0</span></div>
+            </div>
+          </div>
+          <div class="card glass timeline-card">
+            <div class="card-head"><h3>Live Trace</h3><small>tool calls · LLM calls · governance actions</small></div>
+            <ol class="timeline" id="timeline"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TOKENOPS GOVERNANCE ================= -->
+    <section class="page" id="page-governance">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">TokenOps Governance</h2>
+          <p class="page-sub">Control plane runs separately · budgets &amp; policies enforced on every LLM and tool crossing</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn small" id="planeLink" target="_blank" rel="noopener"><span>Control-plane UI ↗</span></a>
+          <button class="btn small" type="button" data-goto="proof"><span>Budget proof →</span></button>
+          <button class="btn small" id="refreshGov"><span>Refresh</span></button>
+        </div>
+      </div>
+      <div class="kpi-grid six" id="govKpis"></div>
+      <div class="gov-layout">
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Per-run LLM Budget</h3><small><code>cost_budget</code> · <code>run_llm_cap</code></small></div>
+          <div class="budget-editor scroll">
+            <div class="budget-now"><span id="budgetNow">$—</span><small>current cap per agent run</small></div>
+            <input type="range" id="budgetRange" min="0.005" max="1" step="0.005" value="0.25" />
+            <div class="budget-row">
+              <input type="number" id="budgetInput" min="0.001" max="100" step="0.001" value="0.25" />
+              <button class="btn primary small" id="budgetApply"><span>Apply</span></button>
+              <button class="btn ghost small" id="budgetReset"><span>Reset to policy file</span></button>
+            </div>
+            <p class="hint">Tip for demos: set the cap to <b>$0.01</b>, ask a broad question and watch TokenOps downgrade the model, then halt the run once the budget is exhausted. Switch the agent to <b>Preview</b> to see what would have happened without enforcement.</p>
+          </div>
+        </div>
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Active Policies</h3><small>seeded from <code>config/governance.yaml</code></small></div>
+          <div class="policy-grid scroll" id="policyGrid"></div>
+        </div>
+        <div class="card glass reveal"><div class="card-head"><h3>Governance Actions</h3><small>by policy</small></div><div class="chart-box"><canvas id="chEvents"></canvas></div></div>
+        <div class="card glass reveal ledger">
+          <div class="card-head">
+            <h3>Run Ledger</h3><small>click a run to open its full trace</small>
+            <button class="btn danger small" id="clearHistory" title="Delete all run records, ledger spend and run metrics"><span>Clear run history</span></button>
+          </div>
+          <div class="table-wrap scroll">
+            <table class="table" id="runsTable">
+              <thead><tr><th>Run</th><th>Persona</th><th>Question</th><th>Status</th><th>Cost</th><th>Steps</th><th>Quality</th><th>Governance</th><th>Started</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card glass reveal"><div class="card-head"><h3>AI Spend by Persona</h3><small>USD across governed runs</small></div><div class="chart-box"><canvas id="chPersona"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- ================= BUDGET PROOF ================= -->
+    <section class="page" id="page-proof">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">Budget Proof</h2>
+          <p class="page-sub">Same question · same agent · different per-run budgets - watch each TokenOps policy decide, with the maths</p>
+        </div>
+      </div>
+      <form class="card glass bp-setup" id="bpForm">
+        <label class="field bp-q"><small>Question (asked once per budget)</small>
+          <input id="bpQuestion" maxlength="2000" required minlength="3" />
+        </label>
+        <label class="field"><small>Persona</small>
+          <select id="bpPersona">
+            <option>CEO</option><option selected>CFO</option><option>CRO</option><option>COO</option><option>CMO</option><option>Head of Wealth</option>
+          </select>
+        </label>
+        <label class="field bp-b"><small>Per-run budgets, USD (max 6)</small>
+          <input id="bpBudgets" value="0.005, 0.25, 1, 10" />
+        </label>
+        <button class="btn primary" id="bpRun" type="submit"><span>Run proof</span></button>
+        <small class="bp-status" id="bpStatus">Runs sequentially in Enforce mode · your current budget is restored afterwards</small>
+      </form>
+      <div class="bp-rules" id="bpRules"></div>
+      <div class="eval-banner" id="bpBanner"></div>
+      <div class="bp-grid" id="bpGrid"></div>
+    </section>
+
+    <!-- ================= EVALUATION LAB ================= -->
+    <section class="page" id="page-evals">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">Evaluation Lab</h2>
+          <p class="page-sub">Custom LLM-as-judge vs LangSmith online evaluation (openevals + code evaluators) on the same production runs</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn small" id="lsProjectLink" target="_blank" rel="noopener" style="display:none"><span>LangSmith project ↗</span></a>
+          <button class="btn small" id="evalSync" type="button" title="Pull all feedback on the traced runs from LangSmith (incl. online-evaluator rules and human annotations)"><span>Sync LangSmith feedback</span></button>
+          <button class="btn small" id="evalRefresh" type="button"><span>Refresh</span></button>
+        </div>
+      </div>
+      <div class="eval-banner" id="evalBanner"></div>
+      <div class="kpi-grid six" id="evalKpis"></div>
+      <div class="eval-layout">
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Judge vs LangSmith</h3><small>overall quality per run · 0-1 scale · click a point</small></div>
+          <div class="chart-box"><canvas id="chEvalScatter"></canvas></div>
+        </div>
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Metric Averages</h3><small>paired metrics · judge score ÷ 5 vs LangSmith 0-1</small></div>
+          <div class="chart-box"><canvas id="chEvalMetrics"></canvas></div>
+        </div>
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Cost, Latency &amp; Safety</h3><small>evaluation overhead · not charged to run budgets</small></div>
+          <div class="tiles scroll" id="evalTiles"></div>
+        </div>
+        <div class="card glass reveal eval-table">
+          <div class="card-head"><h3>Run Comparison</h3><small>pass = judge ≥ 4/5 · LangSmith ≥ 0.80 · click a run</small>
+            <select id="evalFilter" aria-label="Filter runs">
+              <option value="all">All runs</option><option value="both">Both evaluated</option><option value="disagree">Disagreements</option>
+            </select>
+          </div>
+          <div class="table-wrap scroll">
+            <table class="table" id="evalTable">
+              <thead><tr><th>Run</th><th>Question</th><th>Judge</th><th>LangSmith</th><th>Δ</th><th>Verdict</th><th>Safety flags</th><th>Eval cost</th><th>Started</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card glass reveal">
+          <div class="card-head"><h3>Side by Side</h3><small id="evalSelLbl">select a run</small></div>
+          <div class="scroll" id="evalDetail"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DATA & MCP ================= -->
+    <section class="page" id="page-data">
+      <div class="hero">
+        <div class="hero-title">
+          <h2 class="page-title">Data Sources &amp; MCP Servers</h2>
+          <p class="page-sub">Tools are discovered at runtime via MCP <code>tools/list</code> - nothing is hard-coded in the agent</p>
+        </div>
+        <div class="hero-actions"><button class="btn small" id="rediscover"><span>Re-discover tools</span></button></div>
+      </div>
+      <div class="card glass reveal arch-card">
+        <div class="card-head"><h3>Architecture</h3><small>request flow</small></div>
+        <div class="arch">
+          <div class="arch-col">
+            <div class="node"><b>Leadership UI</b><small>HTML · CSS · JS · GSAP</small></div>
+          </div>
+          <div class="arch-arrow"><span>SSE</span></div>
+          <div class="arch-col">
+            <div class="node accent"><b>FinSight Agent</b><small>FastAPI · LangGraph · LangChain</small></div>
+            <div class="node"><b>TokenOps SDK</b><small>wrap_complete · Chronicle boundaries</small></div>
+          </div>
+          <div class="arch-arrow"><span>HTTP</span></div>
+          <div class="arch-col">
+            <div class="node"><b>Azure OpenAI</b><small>Entra ID (RBAC) · no keys</small></div>
+            <div class="node accent2"><b>TokenOps Control Plane</b><small>ledger · budgets · policies · runs</small></div>
+            <div class="node"><b>4 × MCP servers</b><small>streamable HTTP · tools/list · tools/call</small></div>
+          </div>
+          <div class="arch-arrow"><span>SQL / files</span></div>
+          <div class="arch-col">
+            <div class="node"><b>./data</b><small>core banking · CRM · wealth · market · risk · DW</small></div>
+            <div class="node"><b>Azure AI Search</b><small>policy docs (optional)</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-2">
+        <div class="card glass reveal"><div class="card-head"><h3>MCP Servers &amp; Discovered Tools</h3><small id="toolCount"></small></div><div id="mcpList" class="mcp-list scroll"></div></div>
+        <div class="card glass reveal"><div class="card-head"><h3>Integration Sources</h3><small>./data</small></div><div id="dsList" class="ds-list scroll"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= PITCH ================= -->
+    <section class="page" id="page-pitch">
+      <svg class="dg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <marker id="mkM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk m" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="mkW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk w" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="mkA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk a" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="mkC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk c" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="mkG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk g" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="mkR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk r" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+      </svg>
+
+      <div class="deck" id="deck">
+        <div class="deck-view" id="deckView">
+          <div class="deck-stage" id="deckStage">
+
+            <!-- 1 · Cover -->
+            <section class="p-slide p-cover" data-title="Tokenomics">
+              <div class="p-cover-grid">
+                <div class="p-cover-l">
+                  <span class="p-kick" data-a>Microsoft · AI FinOps briefing</span>
+                  <h2 class="p-cover-title" data-a>Tokenomics</h2>
+                  <p class="p-cover-sub" data-a>Governing the economics of agentic AI - <b>from token, to run, to business outcome.</b></p>
+                  <p class="p-pills" data-a><span class="p-pill">1 · Govern spend</span><span class="p-pill">2 · Measure value</span><span class="p-pill">3 · Optimize</span></p>
+                  <div class="p-by" data-a>
+                    <p><b>FinSight × TokenOps</b> - a governed, traced and evaluated banking agent on Microsoft Azure</p>
+                    <small>Chinmoy C. · Microsoft · October 2026</small>
+                  </div>
+                </div>
+                <div class="p-ladder" data-a>
+                  <div class="p-rung"><b>1 token</b><p><span>about ¾ of a word</span><small>a fraction of a cent</small></p></div>
+                  <span class="p-rung-x">↓ × ~4,000</span>
+                  <div class="p-rung"><b>1 call</b><p><span>one question, one answer</span><small>≈ 2¢ on a frontier model</small></p></div>
+                  <span class="p-rung-x">↓ × N turns · tools · sub-agents</span>
+                  <div class="p-rung hot"><b>1 run</b><p><span>an agent looping until it's done</span><small>~70,000 tokens · you can't predict it</small></p></div>
+                  <p class="p-ladder-f"><span>AI cost</span> <span class="p-op">=</span> <b>N tokens</b> <span class="p-op">×</span> <b>price per token</b></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2 · Why now -->
+            <section class="p-slide" data-title="Why now">
+              <header class="p-head">
+                <span class="p-kick" data-a>01 · Why now</span>
+                <h2 class="p-title" data-a>They all had budgets. <em>Why didn't that stop the spend?</em></h2>
+              </header>
+              <div class="p-body p-why">
+                <div class="p-why-grid">
+                  <article class="p-card" data-a><span class="p-tag">Uber · 2026</span><h4>The whole 2026 AI budget, gone in four months</h4><p>~5,000 engineers on agentic coding tools. Spend is now capped at $1,500 per engineer per month.</p><small class="p-src">The Verge · May 2026</small></article>
+                  <article class="p-card" data-a><span class="p-tag">Amazon</span><h4>$1.8M to match author details with listings</h4><p>An 860% overrun against budget - and it took five months to detect.</p><small class="p-src">Financial Times · Jul 2026</small></article>
+                  <article class="p-card" data-a><span class="p-tag">Disney</span><h4>The top 1% of users consume 600× the median</h4><p>Averages hide the whales. Spend is skewed - manage segments, not means.</p><small class="p-src">Business Insider · Apr 2026</small></article>
+                  <article class="p-card" data-a><span class="p-tag">Enterprise · May 2026</span><h4>$500M on one model in a single month</h4><p>Licences rolled out with no usage limits. One month to half a billion dollars.</p><small class="p-src">Industry reporting · May 2026</small></article>
+                </div>
+                <aside class="p-card p-why-stat" data-a>
+                  <b class="p-big">60%+</b>
+                  <p>of enterprises cite uncontrolled GenAI cost as a <b>top-3 barrier</b> to scaling AI in production.</p>
+                  <small class="p-src">IDC</small>
+                  <ul class="p-list">
+                    <li><b>Can't predict</b> - agent loops don't scale linearly; context creep inflates every call.</li>
+                    <li><b>Can't attribute</b> - finance gets a bill, not an explanation.</li>
+                    <li><b>Hidden layers</b> - retrieval, tools, retries and monitoring add cost.</li>
+                    <li><b>Fragmented control</b> - many models and agents, no single policy point.</li>
+                  </ul>
+                </aside>
+              </div>
+              <p class="p-punch" data-a>Budgets were set and reported - <b>but nothing enforced them while the agent was running.</b></p>
+            </section>
+
+            <!-- 3 · Unit of agent economics -->
+            <section class="p-slide" data-title="The unit of cost">
+              <header class="p-head">
+                <span class="p-kick" data-a>02 · The unit of agent economics</span>
+                <h2 class="p-title" data-a>Agents read, reflect, act and talk <em>in tokens.</em></h2>
+              </header>
+              <div class="p-body p-unit">
+                <div class="p-card p-dgcard" data-a>
+                  <svg class="dg" viewBox="0 0 640 430" role="img" aria-label="How an agent consumes input tokens and produces output tokens in a loop">
+                    <text class="dg-k" x="0" y="14">INPUT TOKENS · READ</text>
+                    <text class="dg-k e" x="640" y="108">OUTPUT · ~4× PRICE</text>
+                    <g>
+                      <rect class="dg-b" x="0" y="30" width="165" height="40" rx="10"/><text class="m" x="82" y="55">System events</text>
+                      <rect class="dg-b" x="0" y="92" width="165" height="40" rx="10"/><text class="m" x="82" y="117">User messages</text>
+                      <rect class="dg-b" x="0" y="154" width="165" height="40" rx="10"/><text class="m" x="82" y="179">Tool results</text>
+                      <rect class="dg-b" x="0" y="216" width="165" height="40" rx="10"/><text class="m" x="82" y="241">Retrieval</text>
+                      <rect class="dg-b" x="0" y="278" width="165" height="40" rx="10"/><text class="m" x="82" y="303">Memory</text>
+                      <rect class="dg-b" x="0" y="340" width="165" height="40" rx="10"/><text class="m" x="82" y="365">Agent messages</text>
+                    </g>
+                    <path class="dg-l f" d="M165,50 C210,50 205,210 250,210"/>
+                    <path class="dg-l f" d="M165,112 C210,112 205,210 250,210"/>
+                    <path class="dg-l f" d="M165,174 C210,174 205,210 250,210"/>
+                    <path class="dg-l f" d="M165,236 C210,236 205,210 250,210"/>
+                    <path class="dg-l f" d="M165,298 C210,298 205,210 250,210"/>
+                    <path class="dg-l f" d="M165,360 C210,360 205,210 250,210"/>
+                    <rect class="dg-z" x="225" y="100" width="220" height="220" rx="18"/>
+                    <text class="dg-k" x="241" y="122">AGENT</text>
+                    <rect class="dg-b a" x="250" y="135" width="170" height="150" rx="14"/>
+                    <text class="dg-t xl m" x="335" y="196">LLM</text>
+                    <text class="dg-s m" x="335" y="228">instructions</text>
+                    <text class="dg-s m" x="335" y="250">tools · model</text>
+                    <path class="dg-l w f" d="M420,210 C465,210 460,150 505,150"/>
+                    <path class="dg-l w f" d="M420,210 L505,210"/>
+                    <path class="dg-l w f" d="M420,210 C465,210 460,270 505,270"/>
+                    <rect class="dg-b w" x="505" y="130" width="135" height="40" rx="10"/><text class="m" x="572" y="155">Tool calls</text>
+                    <rect class="dg-b w" x="505" y="190" width="135" height="40" rx="10"/><text class="m" x="572" y="215">Actions</text>
+                    <rect class="dg-b w" x="505" y="250" width="135" height="40" rx="10"/><text class="m" x="572" y="275">Agent messages</text>
+                    <path class="dg-l a" d="M572,290 V400 H82 V384"/>
+                    <text class="dg-x a m" x="327" y="424">loop · every turn re-reads the growing context</text>
+                  </svg>
+                </div>
+                <div class="p-unit-r">
+                  <table class="p-table" data-a>
+                    <thead><tr><th></th><th>Token</th><th>Call</th><th>Run</th></tr></thead>
+                    <tbody>
+                      <tr><th>What it is</th><td>a piece of a word</td><td>one question, one answer</td><td>an agent looping until it's done</td></tr>
+                      <tr><th>Looks like</th><td>"unbelievable" = 3 tokens</td><td>"what's this error?"</td><td>"fix this failing test"</td></tr>
+                      <tr><th>Tokens</th><td>1</td><td>~4,000</td><td>~70,000</td></tr>
+                      <tr><th>Cost</th><td>a fraction of a cent</td><td>~2¢</td><td><b class="bad-t">you can't predict it</b></td></tr>
+                    </tbody>
+                  </table>
+                  <p class="p-formula" data-a><span>AI cost</span><span class="p-op">=</span><b>N tokens</b><span class="p-op">×</span><b>model price per token</b></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4 · The math -->
+            <section class="p-slide" data-title="The math of agent cost">
+              <header class="p-head">
+                <span class="p-kick" data-a>03 · The math of agent cost</span>
+                <h2 class="p-title" data-a>Every dollar on the invoice <em>traces back to a token.</em></h2>
+              </header>
+              <div class="p-body p-math">
+                <div class="p-fx-list">
+                  <div class="p-fx" data-a><small>Per call</small><code>llm_cost = in_tok × price_in + (out_tok + reasoning_tok) × price_out</code><p>Output and reasoning tokens cost 4-5× input. A cached prefix reprices at ~0.1× input.</p></div>
+                  <div class="p-fx" data-a><small>Per turn</small><code>turn_cost = llm_cost + Σⱼ tool_costⱼ</code><p>Every tool crossing carries its own price - a search, a write, a message.</p></div>
+                  <div class="p-fx" data-a><small>Per run · one agent</small><code>agent_cost = Σᵢ (llm_costᵢ + action_costᵢ)   for i = 1..N</code><p>N is loop iterations. Unmanaged, growing context makes the curve worse than linear.</p></div>
+                  <div class="p-fx" data-a><small>Per system · multi-agent</small><code>system_cost = Σₘ agent_costₘ   for m = 1..M</code><p>One user request, M agents delegating - M nested bills to reconcile.</p></div>
+                </div>
+                <aside class="p-card p-ex" data-a>
+                  <span class="p-tag">Worked example · FinSight</span>
+                  <h4>Can the first call fit the budget?</h4>
+                  <p class="p-ex-meta"><b>gpt-5.2-chat</b><small>$2.50 in · $10.00 out per 1M tokens · output cap 4,000 (incl. reasoning) · input ≈ 233</small></p>
+                  <div class="p-ex-calc">
+                    <p><code>4,000 × $10 / 10⁶</code><span class="p-op">+</span><code>233 × $2.50 / 10⁶</code></p>
+                    <p><span class="p-op">≈</span><code>$0.0400</code><span class="p-op">+</span><code>$0.0006</code><span class="p-op">=</span><b class="p-res">$0.0406</b></p>
+                  </div>
+                  <div class="p-ex-out">
+                    <p class="no"><b>$0.005 budget</b><span>$0.0406 ≥ $0.005 → blocked before a single token is billed</span></p>
+                    <p class="ok"><b>$0.25 budget</b><span>$0.0406 &lt; $0.25 → allowed; the ledger tracks actual spend</span></p>
+                  </div>
+                  <small class="p-src">Typical FinSight run: 2 LLM calls · 5 MCP tool calls · 5,585 tokens ≈ $0.022</small>
+                </aside>
+              </div>
+              <p class="p-punch" data-a>Four numbers. <b>Every policy, budget and halt exists to bound them.</b></p>
+            </section>
+
+            <!-- 5 · First principles -->
+            <section class="p-slide" data-title="First principles">
+              <header class="p-head">
+                <span class="p-kick" data-a>04 · First principles</span>
+                <h2 class="p-title" data-a>First principles, <em>and what we measure.</em></h2>
+              </header>
+              <div class="p-body p-prin">
+                <div class="p-card" data-a>
+                  <table class="p-table">
+                    <thead><tr><th></th><th>Principle</th><th>Benchmark metric</th></tr></thead>
+                    <tbody>
+                      <tr><td><b class="p-num">1</b></td><td>Tokens are the unit of cost.</td><td><code>cost per token → value per token</code></td></tr>
+                      <tr><td><b class="p-num">2</b></td><td>Cost is created at the call boundary.</td><td><code>% of spend seen at the call</code></td></tr>
+                      <tr><td><b class="p-num">3</b></td><td>No attribution, no control - tag every call.</td><td><code>% of calls attributed</code></td></tr>
+                      <tr><td><b class="p-num">4</b></td><td>The bill lags, so control must be real-time.</td><td><code>enforcement latency · halt in-flight</code></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <aside class="p-card p-qs" data-a>
+                  <span class="p-tag">The five questions customers ask us</span>
+                  <ol>
+                    <li><span>What are we actually spending on tokens, across the organization?</span><small>P2 · P3</small></li>
+                    <li><span>How do we allocate cost and charge back to the right team?</span><small>P3</small></li>
+                    <li><span>How can we predict cost and stop overspend <b>before</b> it happens?</span><small>P4</small></li>
+                    <li><span>How do we cut cost per outcome without sacrificing quality, security or compliance?</span><small>P1</small></li>
+                    <li><span>How do we measure ROI from AI spend?</span><small>P1</small></li>
+                  </ol>
+                </aside>
+              </div>
+            </section>
+
+            <!-- 6 · Microsoft: value management system -->
+            <section class="p-slide" data-title="Microsoft · value management">
+              <header class="p-head">
+                <span class="p-kick" data-a>05 · The Microsoft story</span>
+                <h2 class="p-title" data-a>The Microsoft <em>Agentic Value Management System</em></h2>
+                <p class="p-lede" data-a>One cost-control and observability plane across every place your organization consumes tokens.</p>
+              </header>
+              <div class="p-body p-mvs">
+                <div class="p-mvs-stack">
+                  <div class="p-mvs-work">
+                    <article class="p-card" data-a><span class="p-tag">Productivity</span><h4>M365 Copilot · Cowork · Scout</h4><p class="p-chips"><span>free tier</span><span>model choice</span><span>spend caps</span><span>gated credits</span></p></article>
+                    <article class="p-card" data-a><span class="p-tag">Dev process</span><h4>GitHub Copilot</h4><p class="p-chips"><span>model router</span><span>MCP gateway</span><span>marketplace</span></p></article>
+                    <article class="p-card" data-a><span class="p-tag">Business process</span><h4>Dynamics 365 · Copilot Studio</h4><p class="p-chips"><span>capacity pools</span><span>environment allocation</span><span>usage forecasting</span></p></article>
+                    <article class="p-card" data-a><span class="p-tag">Security</span><h4>Security Copilot</h4><p class="p-chips"><span>SCU calculator</span><span>overage capacity</span></p></article>
+                  </div>
+                  <div class="p-mvs-row" data-a><p class="p-mvs-l"><b>Agent runtime</b><small>Microsoft Foundry</small></p><p class="p-chips lg"><span>Model Router</span><span>Evals &amp; Toolbox</span><span>Agent Optimizer</span><span>Fine-tuning</span><span>Standardized tools / skills</span></p></div>
+                  <div class="p-mvs-row" data-a><p class="p-mvs-l"><b>Optimized context</b><small>Microsoft IQ</small></p><p class="p-chips lg"><span>Work IQ</span><span>Fabric IQ</span><span>Foundry IQ knowledge bases</span><span>Web</span></p></div>
+                  <div class="p-mvs-row hl" data-a><p class="p-mvs-l"><b>Cost control &amp; observability</b><small>the governance plane</small></p><p class="p-chips lg"><span>Azure API Management</span><span>Agent 365</span><span>Azure Cost Management</span><span>Foundry</span><span class="acc">+ run-level budgets · this demo</span></p></div>
+                  <div class="p-mvs-row" data-a><p class="p-mvs-l"><b>Optimized procurement</b><small>commit for baseload</small></p><p class="p-chips lg"><span>Provisioned throughput (PTU)</span><span>Pre-purchase plans (P3)</span><span>pay-as-you-go for peaks</span></p></div>
+                </div>
+                <aside class="p-stages">
+                  <span class="p-tag" data-a>AI FinOps maturity</span>
+                  <article class="p-stage" data-a><b>1</b><p><strong>Govern spend</strong><span>visibility, policies, limits and alerts</span></p></article>
+                  <article class="p-stage" data-a><b>2</b><p><strong>Measure value</strong><span>cost and value across services and vendors</span></p></article>
+                  <article class="p-stage" data-a><b>3</b><p><strong>Optimize</strong><span>more business value per dollar, iteratively</span></p></article>
+                  <p class="p-stage-q" data-a>"You can't manage <b>what you can't see.</b>"</p>
+                </aside>
+              </div>
+            </section>
+
+            <!-- 7 · Microsoft: runtime levers -->
+            <section class="p-slide" data-title="Microsoft · runtime levers">
+              <header class="p-head">
+                <span class="p-kick" data-a>06 · The Microsoft story</span>
+                <h2 class="p-title" data-a>Four runtime levers lower <em>cost per outcome.</em></h2>
+              </header>
+              <div class="p-body p-levers">
+                <div class="p-lever-grid">
+                  <article class="p-card p-lever" data-a><span class="p-tag">Right model</span><b class="p-big">60%</b><p>lower model cost with <strong>Foundry Model Router</strong> vs a GPT-4.1-only baseline, at similar accuracy.</p><small class="p-src">Microsoft internal tests · 11,000+ models in the Foundry catalog</small></article>
+                  <article class="p-card p-lever" data-a><span class="p-tag">Right context</span><b class="p-big">80%</b><p>fewer tokens for coding harnesses with <strong>Work IQ APIs</strong>. Foundry IQ lifts recall up to 54% at 34% lower cost.</p><small class="p-src">Microsoft 365 &amp; Foundry announcements · 2026</small></article>
+                  <article class="p-card p-lever" data-a><span class="p-tag">No double payment</span><b class="p-big">30%</b><p>fewer redundant tokens with <strong>APIM semantic caching</strong> on Azure Managed Redis - plus prompt and tool-result caching.</p><small class="p-src">also cuts latency on repeat prompts</small></article>
+                  <article class="p-card p-lever" data-a><span class="p-tag">Right execution</span><b class="p-big">PTU</b><p><strong>Provisioned throughput + pre-purchase</strong> for baseload, pay-go for peaks. Agent Optimizer tests, selects and trims work.</p><small class="p-src">Foundry Agent Service · Agent Optimizer in preview</small></article>
+                </div>
+                <div class="p-speeds" data-a>
+                  <p class="p-speeds-h"><span class="p-tag">Three speeds of a managed investment</span><small>and where FinSight × TokenOps plugs in</small></p>
+                  <div class="p-speed-row">
+                    <article class="p-speed"><h4>In the moment</h4><p>routing, context, caching and execution choices on every request</p><small class="p-map">→ pre-call worst-case check · downgrade at 80%</small></article>
+                    <article class="p-speed"><h4>Over days &amp; weeks</h4><p>traces, evaluations and workflow optimization improve each agent</p><small class="p-map">→ run traces · LLM-as-judge · LangSmith evals</small></article>
+                    <article class="p-speed"><h4>Continuously</h4><p>attribution, budgets, alerts, token limits, quotas and policy</p><small class="p-map">→ run ledger · per-run budgets · policy-as-code</small></article>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 8 · Govern the run -->
+            <section class="p-slide" data-title="Govern the run">
+              <header class="p-head">
+                <span class="p-kick" data-a>07 · What's missing</span>
+                <h2 class="p-title" data-a>Token management must <em>govern the run, not the request.</em></h2>
+              </header>
+              <div class="p-body p-run">
+                <div class="p-run-l">
+                  <div class="p-vs" data-a>
+                    <article class="p-card"><span class="p-tag muted">A gateway sees</span><h4>One request at a time</h4><p>Per-request caps, keys and routing. A great front door - but blind to the task.</p></article>
+                    <article class="p-card hl"><span class="p-tag">A run is</span><h4>The whole task</h4><p>Loops, growing context, fan-out, sub-agents. One cumulative bill - per run and per customer.</p></article>
+                  </div>
+                  <ul class="p-req" data-a>
+                    <li><b>One budget</b> across every agent in the run, on a shared ledger</li>
+                    <li><b>Enforcement in the call path</b>, before the spend lands</li>
+                    <li><b>Act, don't alert</b> - steer or halt while the run is live</li>
+                  </ul>
+                </div>
+                <div class="p-card p-land" data-a>
+                  <p class="p-land-h"><span class="p-tag">The landscape</span><small>How today's tools govern AI spend - and where they stop</small></p>
+                  <table class="p-table p-cmp">
+                    <thead><tr><th></th><th>LiteLLM</th><th>Portkey</th><th>Cloudflare</th><th>Langfuse</th><th class="hl"><b>TokenOps</b></th></tr></thead>
+                    <tbody>
+                      <tr><th>Governs</th><td>request</td><td>request</td><td>request</td><td>trace</td><td class="hl"><b>the run</b></td></tr>
+                      <tr><th>Cost view</th><td>per request</td><td>per request</td><td>per request</td><td>per trace</td><td class="hl"><b>per run</b></td></tr>
+                      <tr><th>Budget stop</th><td>team / key</td><td>virtual key</td><td>yes</td><td>no</td><td class="hl"><b>run-aware</b></td></tr>
+                      <tr><th>Steering</th><td>routing</td><td>fallbacks</td><td>routing</td><td>none</td><td class="hl"><b>full</b></td></tr>
+                      <tr><th>Enforce at</th><td>in-path</td><td>in-path</td><td>in-path</td><td>out-of-band</td><td class="hl"><b>in-path</b></td></tr>
+                      <tr><th>Fail-closed</th><td>optional</td><td>limited</td><td>no</td><td>no</td><td class="hl"><b>optional</b></td></tr>
+                    </tbody>
+                  </table>
+                  <small class="p-src">Complements Azure API Management: APIM governs traffic per request and consumer; a run-aware layer bounds the cumulative bill of one agent task.</small>
+                </div>
+              </div>
+            </section>
+
+            <!-- 9 · TokenOps -->
+            <section class="p-slide" data-title="TokenOps">
+              <header class="p-head">
+                <span class="p-kick" data-a>08 · TokenOps</span>
+                <h2 class="p-title" data-a><em>Out-of-band</em> by design: instrument, account, enforce.</h2>
+                <p class="p-lede" data-a>Wrap one call. Your agents stay unchanged - the control plane decides.</p>
+              </header>
+              <div class="p-body p-tops">
+                <div class="p-card p-dgcard" data-a>
+                  <svg class="dg" viewBox="0 0 760 500" role="img" aria-label="TokenOps data plane and out-of-band control plane">
+                    <rect class="dg-z" x="0" y="0" width="760" height="150" rx="16"/>
+                    <text class="dg-k" x="22" y="30">DATA PLANE · YOUR AGENTS, UNCHANGED</text>
+                    <rect class="dg-b" x="90" y="60" width="200" height="60" rx="12"/><text class="dg-t m" x="190" y="96">Agent A</text>
+                    <rect class="dg-b" x="470" y="60" width="200" height="60" rx="12"/><text class="dg-t m" x="570" y="96">Agent B</text>
+                    <path class="dg-l w f" d="M290,90 H468"/>
+                    <text class="dg-x w m" x="380" y="80">A2A · one run</text>
+                    <path class="dg-l w" d="M190,120 V228"/>
+                    <text class="dg-x w" x="202" y="180">emit</text>
+                    <path class="dg-l w" d="M570,230 V122"/>
+                    <text class="dg-x w" x="582" y="180">apply</text>
+                    <rect class="dg-z w" x="0" y="230" width="760" height="240" rx="16"/>
+                    <text class="dg-k" x="22" y="260">CONTROL PLANE · OUT-OF-BAND</text>
+                    <text class="dg-t lg m" x="100" y="348">Instrument</text>
+                    <text class="dg-s m" x="100" y="374">tag every call</text>
+                    <path class="dg-l" d="M168,340 H210"/>
+                    <text class="dg-t lg m" x="265" y="348">Account</text>
+                    <text class="dg-s m" x="265" y="374">ledger · per run</text>
+                    <path class="dg-l" d="M318,340 H358"/>
+                    <text class="dg-t lg m w-t" x="412" y="348">Enforce</text>
+                    <text class="dg-s m" x="412" y="374">pre-call · in-path</text>
+                    <path class="dg-l w" d="M466,332 L534,306"/>
+                    <path class="dg-l r" d="M466,352 L534,384"/>
+                    <rect class="dg-b w" x="540" y="278" width="190" height="56" rx="10"/>
+                    <text class="dg-t m w-t" x="635" y="302">STEER</text>
+                    <text class="dg-s m" x="635" y="323">downgrade · reroute</text>
+                    <rect class="dg-b r" x="540" y="358" width="190" height="56" rx="10"/>
+                    <text class="dg-t m r-t" x="635" y="382">HALT</text>
+                    <text class="dg-s m" x="635" y="403">circuit breaker</text>
+                    <text class="dg-s" x="0" y="496">Policies steer the run. Only the circuit breaker halts it.</text>
+                  </svg>
+                </div>
+                <div class="p-tiles">
+                  <article class="p-card p-tile" data-a><small class="p-tn">01 · Attribution</small><h4>Every crossing tagged</h4><p>LLM and tool calls trace back to a run, a service, an agent.</p><small class="p-map">FinSight: persona · department · mode</small></article>
+                  <article class="p-card p-tile" data-a><small class="p-tn">02 · Budgets</small><h4>One cap, enforced pre-call</h4><p><code>cost_budget</code> guarantees it; <code>pre_call_worst_case</code> stops the breach first.</p><small class="p-map">FinSight: run_llm_cap · $0.25 per question</small></article>
+                  <article class="p-card p-tile" data-a><small class="p-tn">03 · Segments</small><h4>Sliced by who, not just how much</h4><p>Tag runs by user, tenant, country or division.</p><small class="p-map">FinSight: spend by persona</small></article>
+                  <article class="p-card p-tile" data-a><small class="p-tn">04 · Policies that steer</small><h4>Most policies nudge, not stop</h4><p>Mutate the prompt, inject a correction, reroute cheaper.</p><small class="p-map">FinSight: cost_guard → gpt-5-nano at 80%</small></article>
+                  <article class="p-card p-tile" data-a><small class="p-tn">05 · Circuit breaker</small><h4>Halt is the last resort</h4><p><code>cost_budget</code> is the sticky, run-wide backstop under every policy.</p><small class="p-map">FinSight: halts shown in trace + UI</small></article>
+                  <article class="p-card p-tile" data-a><small class="p-tn">06 · Admin + dashboard</small><h4>One surface writes</h4><p>Budgets and policies live in one place; agents only read them.</p><small class="p-map">FinSight: governance.yaml → plane :8800</small></article>
+                </div>
+              </div>
+            </section>
+
+            <!-- 10 · Architecture -->
+            <section class="p-slide" data-title="Architecture">
+              <header class="p-head">
+                <span class="p-kick" data-a>09 · Architecture</span>
+                <h2 class="p-title" data-a>FinSight × TokenOps: <em>how the demo is built.</em></h2>
+              </header>
+              <div class="p-card p-dgfull" data-a>
+                <svg class="dg" viewBox="0 0 1420 640" role="img" aria-label="Architecture of the FinSight demo with TokenOps">
+                  <!-- legend -->
+                  <path class="dg-l f" d="M20,20 H62"/><text class="dg-s" x="72" y="25">request / response</text>
+                  <path class="dg-l w" d="M220,20 H262"/><text class="dg-s" x="272" y="25">governance</text>
+                  <path class="dg-l d" d="M20,50 H62"/><text class="dg-s" x="72" y="55">async · optional</text>
+                  <path class="dg-l c" d="M220,50 H262"/><text class="dg-s" x="272" y="55">Azure (Entra ID)</text>
+
+                  <!-- experience -->
+                  <rect class="dg-b" x="520" y="0" width="380" height="66" rx="12"/>
+                  <text class="dg-t m" x="710" y="28">Leadership UI</text>
+                  <text class="dg-s m" x="710" y="50">Executive · AI Analyst · TokenOps · Proof · Evals</text>
+
+                  <!-- app zone -->
+                  <rect class="dg-z" x="500" y="92" width="420" height="540" rx="18"/>
+                  <text class="dg-k" x="514" y="114">FINSIGHT APP · FASTAPI · :8000</text>
+                  <rect class="dg-b" x="520" y="128" width="380" height="72" rx="12"/>
+                  <text class="dg-t m" x="710" y="158">API layer · server.py</text>
+                  <text class="dg-s m" x="710" y="182">REST + SSE · /api/agent/stream · /api/tokenops/*</text>
+                  <rect class="dg-b a" x="520" y="245" width="380" height="90" rx="12"/>
+                  <text class="dg-t m" x="710" y="276">LangGraph agent</text>
+                  <text class="dg-s m" x="710" y="300">agent ⇄ tools loop · Azure OpenAI chat</text>
+                  <text class="dg-s m" x="710" y="321">tags: persona · department · mode</text>
+                  <rect class="dg-b w" x="520" y="380" width="380" height="90" rx="12"/>
+                  <text class="dg-t m" x="710" y="411">TokenOps SDK · wrap_complete</text>
+                  <text class="dg-s m" x="710" y="435">Governor: pre-call worst case · cost guard</text>
+                  <text class="dg-s m" x="710" y="456">budget · step cap · tool fix · runaway</text>
+                  <rect class="dg-b" x="520" y="520" width="380" height="90" rx="12"/>
+                  <text class="dg-t m" x="710" y="551">Trace &amp; evaluate</text>
+                  <text class="dg-s m" x="710" y="575">trace waterfall · safety &amp; PII checks</text>
+                  <text class="dg-s m" x="710" y="596">LLM-as-judge (gpt-5-nano) · LangSmith</text>
+
+                  <path class="dg-l f both" d="M710,66 V126"/><text class="dg-x" x="722" y="102">REST + SSE</text>
+                  <path class="dg-l f" d="M710,200 V243"/><text class="dg-x" x="722" y="227">run(question, tags)</text>
+                  <path class="dg-l w f" d="M710,335 V378"/><text class="dg-x w" x="722" y="362">every LLM call</text>
+                  <path class="dg-l d" d="M710,470 V518"/><text class="dg-x" x="722" y="500">spans · tokens · cost</text>
+
+                  <!-- control plane -->
+                  <rect class="dg-b a" x="20" y="245" width="400" height="225" rx="14"/>
+                  <text class="dg-t m" x="220" y="278">TokenOps Control Plane</text>
+                  <text class="dg-s m" x="220" y="300">:8800 · runs separately · SQLite</text>
+                  <rect class="dg-b" x="40" y="318" width="360" height="30" rx="8"/><text class="dg-s" x="56" y="338">Budgets · run_llm_cap $0.25 / run</text>
+                  <rect class="dg-b" x="40" y="355" width="360" height="30" rx="8"/><text class="dg-s" x="56" y="375">Policies · 10 seeded from YAML</text>
+                  <rect class="dg-b" x="40" y="392" width="360" height="30" rx="8"/><text class="dg-s" x="56" y="412">Ledger · actual spend per run</text>
+                  <rect class="dg-b" x="40" y="429" width="360" height="30" rx="8"/><text class="dg-s" x="56" y="449">Run records · status · halts</text>
+                  <path class="dg-l w both" d="M518,425 H422"/>
+                  <text class="dg-x w m" x="470" y="414">policies</text>
+                  <text class="dg-x w m" x="470" y="446">spend</text>
+                  <path class="dg-l w" d="M520,164 H220 V243"/>
+                  <text class="dg-x w m" x="370" y="156">reseed · budget edits · ledger</text>
+                  <rect class="dg-b" x="20" y="520" width="400" height="90" rx="12"/>
+                  <text class="dg-t m" x="220" y="551">config/governance.yaml</text>
+                  <text class="dg-s m" x="220" y="575">policy-as-code · pushed at start-up</text>
+                  <text class="dg-s m" x="220" y="596">POST /v1/admin/reseed-governance</text>
+                  <path class="dg-l w" d="M220,520 V472"/>
+
+                  <!-- data + MCP -->
+                  <rect class="dg-b" x="1000" y="0" width="190" height="66" rx="12"/>
+                  <text class="dg-t m" x="1095" y="28">./data</text>
+                  <text class="dg-s m" x="1095" y="50">CRM · wealth · risk · DW</text>
+                  <rect class="dg-b c" x="1210" y="0" width="190" height="66" rx="12"/>
+                  <text class="dg-t m" x="1305" y="28">Azure AI Search</text>
+                  <text class="dg-s m" x="1305" y="50">policy docs · optional</text>
+                  <rect class="dg-z" x="1000" y="128" width="400" height="207" rx="16"/>
+                  <text class="dg-k" x="1014" y="150">MCP SERVERS · STREAMABLE HTTP</text>
+                  <rect class="dg-b" x="1012" y="162" width="184" height="76" rx="10"/><text class="dg-t m" x="1104" y="196">Core Banking</text><text class="dg-s m" x="1104" y="220">:8101</text>
+                  <rect class="dg-b" x="1204" y="162" width="184" height="76" rx="10"/><text class="dg-t m" x="1296" y="196">Wealth &amp; Markets</text><text class="dg-s m" x="1296" y="220">:8102</text>
+                  <rect class="dg-b" x="1012" y="248" width="184" height="76" rx="10"/><text class="dg-t m" x="1104" y="282">Risk &amp; Compliance</text><text class="dg-s m" x="1104" y="306">:8103</text>
+                  <rect class="dg-b" x="1204" y="248" width="184" height="76" rx="10"/><text class="dg-t m" x="1296" y="282">Analytics</text><text class="dg-s m" x="1296" y="306">:8104</text>
+                  <path class="dg-l f" d="M900,290 H1010"/>
+                  <text class="dg-x m" x="955" y="281">tools/call</text>
+                  <text class="dg-x m" x="955" y="309">@boundary</text>
+                  <path class="dg-l" d="M1095,128 V68"/>
+                  <path class="dg-l c d" d="M1305,128 V68"/>
+
+                  <!-- Azure + LangSmith -->
+                  <rect class="dg-b c" x="1000" y="380" width="400" height="90" rx="12"/>
+                  <text class="dg-t m" x="1200" y="411">Azure OpenAI</text>
+                  <text class="dg-s m" x="1200" y="435">gpt-5.2-chat (primary) · gpt-5-nano (downgrade, judge)</text>
+                  <text class="dg-s m" x="1200" y="456">Entra ID · DefaultAzureCredential · no API keys</text>
+                  <path class="dg-l c f" d="M900,425 H998"/>
+                  <text class="dg-x c m" x="950" y="416">governed</text>
+                  <text class="dg-x c m" x="950" y="444">call</text>
+                  <rect class="dg-b" x="1000" y="520" width="400" height="90" rx="12"/>
+                  <text class="dg-t m" x="1200" y="551">LangSmith</text>
+                  <text class="dg-s m" x="1200" y="575">run traces · openevals online evaluators</text>
+                  <text class="dg-s m" x="1200" y="596">feedback synced into the Evaluation Lab</text>
+                  <path class="dg-l d" d="M900,565 H998"/>
+                  <text class="dg-x m" x="950" y="556">traces</text>
+                </svg>
+              </div>
+            </section>
+
+            <!-- 11 · Request flow -->
+            <section class="p-slide" data-title="Request flow">
+              <header class="p-head">
+                <span class="p-kick" data-a>10 · Request flow</span>
+                <h2 class="p-title" data-a>One question, <em>governed at every crossing.</em></h2>
+              </header>
+              <div class="p-card p-dgfull" data-a>
+                <svg class="dg" viewBox="0 0 1420 590" role="img" aria-label="Request flow of one governed agent run">
+                  <!-- row 1 -->
+                  <rect class="dg-b" x="0" y="50" width="230" height="110" rx="14"/><circle class="dg-n" cx="26" cy="78" r="14"/><text class="dg-nt" x="26" y="83">1</text><text class="dg-t" x="50" y="84">Ask</text><text class="dg-s" x="18" y="116">POST /api/agent/stream</text><text class="dg-s" x="18" y="140">persona · dept · mode</text>
+                  <rect class="dg-b" x="297.5" y="50" width="230" height="110" rx="14"/><circle class="dg-n" cx="323.5" cy="78" r="14"/><text class="dg-nt" x="323.5" y="83">2</text><text class="dg-t" x="347.5" y="84">Open a run</text><text class="dg-s" x="315.5" y="116">tokenops_run(tags)</text><text class="dg-s" x="315.5" y="140">Governor ← plane policies</text>
+                  <rect class="dg-b" x="595" y="50" width="230" height="110" rx="14"/><circle class="dg-n" cx="621" cy="78" r="14"/><text class="dg-nt" x="621" y="83">3</text><text class="dg-t" x="645" y="84">Discover tools</text><text class="dg-s" x="613" y="116">MCP tools/list · 4 servers</text><text class="dg-s" x="613" y="140">nothing hard-coded</text>
+                  <rect class="dg-b a" x="892.5" y="50" width="230" height="110" rx="14"/><circle class="dg-n" cx="918.5" cy="78" r="14"/><text class="dg-nt" x="918.5" y="83">4</text><text class="dg-t" x="942.5" y="84">Plan the turn</text><text class="dg-s" x="910.5" y="116">LangGraph agent node</text><text class="dg-s" x="910.5" y="140">messages + tool schemas</text>
+                  <rect class="dg-b w" x="1190" y="50" width="230" height="110" rx="14"/><circle class="dg-n" cx="1216" cy="78" r="14"/><text class="dg-nt" x="1216" y="83">5</text><text class="dg-t" x="1240" y="84">Pre-call check</text><text class="dg-s" x="1208" y="116">input + max_output × price</text><text class="dg-s" x="1208" y="140">fits remaining budget?</text>
+                  <path class="dg-l f" d="M230,105 H295"/>
+                  <path class="dg-l f" d="M527.5,105 H593"/>
+                  <path class="dg-l f" d="M825,105 H890"/>
+                  <path class="dg-l f" d="M1122.5,105 H1188"/>
+                  <rect class="dg-b r" x="1170" y="0" width="250" height="32" rx="16"/>
+                  <text class="dg-pill r-t m" x="1295" y="21">✕ BLOCK · fail closed · $0 billed</text>
+                  <path class="dg-l r" d="M1295,50 V34"/>
+                  <text class="dg-x r e" x="1160" y="21">doesn't fit</text>
+
+                  <!-- row 2 (right to left) -->
+                  <rect class="dg-b w" x="1190" y="260" width="230" height="110" rx="14"/><circle class="dg-n" cx="1216" cy="288" r="14"/><text class="dg-nt" x="1216" y="293">6</text><text class="dg-t" x="1240" y="294">Steer</text><text class="dg-s" x="1208" y="326">spend ≥ 80% of budget?</text><text class="dg-s" x="1208" y="350">→ downgrade to gpt-5-nano</text>
+                  <rect class="dg-b c" x="892.5" y="260" width="230" height="110" rx="14"/><circle class="dg-n" cx="918.5" cy="288" r="14"/><text class="dg-nt" x="918.5" y="293">7</text><text class="dg-t" x="942.5" y="294">Call the model</text><text class="dg-s" x="910.5" y="326">Azure OpenAI · Entra ID</text><text class="dg-s" x="910.5" y="350">answer or tool calls</text>
+                  <rect class="dg-b w" x="595" y="260" width="230" height="110" rx="14"/><circle class="dg-n" cx="621" cy="288" r="14"/><text class="dg-nt" x="621" y="293">8</text><text class="dg-t" x="645" y="294">Account</text><text class="dg-s" x="613" y="326">ledger += actual usage</text><text class="dg-s" x="613" y="350">budget exhausted → halt</text>
+                  <rect class="dg-b w" x="297.5" y="260" width="230" height="110" rx="14"/><circle class="dg-n" cx="323.5" cy="288" r="14"/><text class="dg-nt" x="323.5" y="293">9</text><text class="dg-t" x="347.5" y="294">Act on tools</text><text class="dg-s" x="315.5" y="326">tools/call via @boundary</text><text class="dg-s" x="315.5" y="350">step · tool-fix · output caps</text>
+                  <rect class="dg-b" x="0" y="260" width="230" height="110" rx="14"/><circle class="dg-n" cx="26" cy="288" r="14"/><text class="dg-nt" x="26" y="293">10</text><text class="dg-t" x="50" y="294">More tools?</text><text class="dg-s" x="18" y="326">yes → next turn (loop)</text><text class="dg-s" x="18" y="350">no → final answer</text>
+                  <path class="dg-l w" d="M1295,160 V258"/>
+                  <text class="dg-x w" x="1307" y="214">fits → allow</text>
+                  <path class="dg-l f" d="M1190,315 H1124.5"/>
+                  <path class="dg-l f" d="M892.5,315 H827"/>
+                  <path class="dg-l f" d="M595,315 H529.5"/>
+                  <path class="dg-l f" d="M297.5,315 H232"/>
+                  <path class="dg-l a f" d="M115,260 V215 H1007.5 V162"/>
+                  <text class="dg-x a m" x="560" y="206">loop · the next turn re-reads the growing context</text>
+                  <rect class="dg-b r" x="600" y="390" width="220" height="34" rx="17"/>
+                  <text class="dg-pill r-t m" x="710" y="412">■ HALT · run stopped</text>
+                  <path class="dg-l r" d="M710,370 V388"/>
+
+                  <!-- row 3 -->
+                  <path class="dg-l g" d="M115,370 V468"/>
+                  <text class="dg-x g" x="127" y="425">no more tools</text>
+                  <rect class="dg-b g" x="0" y="470" width="230" height="110" rx="14"/><circle class="dg-n g" cx="26" cy="498" r="14"/><text class="dg-nt" x="26" y="503">11</text><text class="dg-t" x="50" y="504">Answer</text><text class="dg-s" x="18" y="536">streamed over SSE</text><text class="dg-s" x="18" y="560">llm · tool · governance · done</text>
+                  <rect class="dg-b" x="297.5" y="470" width="230" height="110" rx="14"/><circle class="dg-n" cx="323.5" cy="498" r="14"/><text class="dg-nt" x="323.5" y="503">12</text><text class="dg-t" x="347.5" y="504">Trace</text><text class="dg-s" x="315.5" y="536">waterfall · tokens · cost</text><text class="dg-s" x="315.5" y="560">safety &amp; PII checks</text>
+                  <rect class="dg-b" x="595" y="470" width="230" height="110" rx="14"/><circle class="dg-n" cx="621" cy="498" r="14"/><text class="dg-nt" x="621" y="503">13</text><text class="dg-t" x="645" y="504">Evaluate</text><text class="dg-s" x="613" y="536">LLM-as-judge · 5 metrics</text><text class="dg-s" x="613" y="560">LangSmith online evals</text>
+                  <rect class="dg-b g" x="892.5" y="470" width="527.5" height="110" rx="14"/>
+                  <text class="dg-t lg g-t" x="918" y="508">Outcome · a governed answer</text>
+                  <text class="dg-s" x="918" y="540">cost known per run · attributed to persona &amp; department</text>
+                  <text class="dg-s" x="918" y="564">never above the per-run budget - by construction</text>
+                  <path class="dg-l g" d="M230,525 H295"/>
+                  <path class="dg-l" d="M527.5,525 H593"/>
+                  <path class="dg-l g" d="M825,525 H890"/>
+                </svg>
+              </div>
+            </section>
+
+            <!-- 12 · Sequence -->
+            <section class="p-slide" data-title="Sequence">
+              <header class="p-head">
+                <span class="p-kick" data-a>11 · Sequence</span>
+                <h2 class="p-title" data-a>Who talks to whom - <em>and where TokenOps decides.</em></h2>
+              </header>
+              <div class="p-card p-dgfull" data-a>
+                <svg class="dg" viewBox="0 0 1420 668" role="img" aria-label="Sequence diagram of a governed agent run">
+                  <line class="dg-life" x1="80" y1="46" x2="80" y2="664"/>
+                  <line class="dg-life" x1="290" y1="46" x2="290" y2="664"/>
+                  <line class="dg-life" x1="500" y1="46" x2="500" y2="664"/>
+                  <line class="dg-life" x1="710" y1="46" x2="710" y2="664"/>
+                  <line class="dg-life" x1="920" y1="46" x2="920" y2="664"/>
+                  <line class="dg-life" x1="1130" y1="46" x2="1130" y2="664"/>
+                  <line class="dg-life" x1="1340" y1="46" x2="1340" y2="664"/>
+                  <rect class="dg-b" x="0" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="80" y="29">Leadership UI</text>
+                  <rect class="dg-b" x="210" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="290" y="29">FinSight API</text>
+                  <rect class="dg-b a" x="420" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="500" y="29">LangGraph agent</text>
+                  <rect class="dg-b w" x="630" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="710" y="29">TokenOps SDK</text>
+                  <rect class="dg-b a" x="840" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="920" y="29">Control plane</text>
+                  <rect class="dg-b c" x="1050" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="1130" y="29">Azure OpenAI</text>
+                  <rect class="dg-b" x="1260" y="0" width="160" height="46" rx="12"/><text class="dg-t m" x="1340" y="29">MCP server</text>
+
+                  <path class="dg-l" d="M80,82 H288"/><text class="dg-x m" x="185" y="75">POST /api/agent/stream</text>
+                  <path class="dg-l" d="M290,114 H498"/><text class="dg-x m" x="395" y="107">run(question, tags, mode)</text>
+                  <path class="dg-l" d="M500,146 H708"/><text class="dg-x m" x="605" y="139">tokenops_run(tags)</text>
+                  <path class="dg-l w" d="M710,178 H918"/><text class="dg-x w m" x="815" y="171">register run · load policies</text>
+                  <path class="dg-l w d" d="M920,210 H712"/><text class="dg-x w m" x="815" y="203">Governor · budget + policies</text>
+                  <path class="dg-l" d="M500,242 H1338"/><text class="dg-x m" x="1235" y="235">tools/list</text>
+                  <path class="dg-l d" d="M1340,274 H502"/><text class="dg-x m" x="1235" y="267">tool schemas</text>
+
+                  <rect class="dg-fr" x="420" y="290" width="990" height="262" rx="10"/>
+                  <rect class="dg-tab" x="420" y="290" width="150" height="24" rx="8"/>
+                  <text class="dg-x a" x="432" y="307">loop · each turn</text>
+                  <path class="dg-l" d="M500,330 H708"/><text class="dg-x m" x="605" y="323">wrap_complete(messages)</text>
+                  <path class="dg-l w" d="M710,344 H766 V366 H714"/><text class="dg-x w" x="778" y="361">pre_call_worst_case · cost_guard</text>
+                  <path class="dg-l c" d="M710,392 H1128"/><text class="dg-x c m" x="1020" y="385">chat.completions · Entra ID</text>
+                  <path class="dg-l c d" d="M1130,418 H712"/><text class="dg-x c m" x="1020" y="411">message + usage</text>
+                  <path class="dg-l w" d="M710,444 H918"/><text class="dg-x w m" x="815" y="437">record spend → ledger</text>
+                  <path class="dg-l d" d="M710,470 H502"/><text class="dg-x m" x="605" y="463">AIMessage + tool_calls</text>
+                  <path class="dg-l" d="M500,498 H1338"/><text class="dg-x m" x="1235" y="491">tools/call · @boundary</text>
+                  <path class="dg-l d" d="M1340,526 H502"/><text class="dg-x m" x="1235" y="519">tool result</text>
+
+                  <rect class="dg-fr r" x="600" y="566" width="440" height="36" rx="8"/>
+                  <text class="dg-x r" x="614" y="589">alt · breach → Halt · run stops, nothing more billed</text>
+                  <path class="dg-l d" d="M500,626 H292"/><text class="dg-x m" x="395" y="619">answer + run metrics</text>
+                  <path class="dg-l d" d="M290,654 H82"/><text class="dg-x m" x="185" y="647">SSE events · done</text>
+                </svg>
+              </div>
+            </section>
+
+            <!-- 13 · Proof -->
+            <section class="p-slide" data-title="Proof in the demo">
+              <header class="p-head">
+                <span class="p-kick" data-a>12 · Proof in the demo</span>
+                <h2 class="p-title" data-a>Same question. Four budgets. <em>The policies decide.</em></h2>
+                <p class="p-lede" data-a>Live on the Budget Proof page - each tier runs the same CFO question in Enforce mode.</p>
+              </header>
+              <div class="p-body p-proof">
+                <div class="p-tiers">
+                  <article class="p-card p-tier no" data-a><b class="p-tier-b">$0.005</b><span class="p-badge r">Blocked pre-call</span><p><code>4,000 × $10/10⁶ + 233 × $2.50/10⁶ ≈ $0.0406</code></p><p>$0.0406 ≥ $0.005 → refused before the first call. <b>$0 billed.</b></p></article>
+                  <article class="p-card p-tier" data-a><b class="p-tier-b">$0.25</b><span class="p-badge g">Completed</span><p><code>worst case $0.0406 &lt; $0.25</code></p><p>A typical run costs ≈ $0.022 - about <b>91% headroom</b>.</p></article>
+                  <article class="p-card p-tier" data-a><b class="p-tier-b">$1.00</b><span class="p-badge g">Completed</span><p><code>a ceiling, not a target</code></p><p>Same answer, same ≈ $0.022. A bigger budget <b>doesn't inflate spend</b>.</p></article>
+                  <article class="p-card p-tier" data-a><b class="p-tier-b">$10.00</b><span class="p-badge g">Completed</span><p><code>cost_budget · sticky backstop</code></p><p>Still ≈ $0.022. The cap only matters <b>when something goes wrong</b>.</p></article>
+                </div>
+                <div class="p-proof-b">
+                  <article class="p-card" data-a><span class="p-tag">Between the tiers</span><h4>Steer before you halt</h4><p>At a $0.08 cap, <code>cost_guard</code> trips at 80% ($0.064) and downgrades to <b>gpt-5-nano</b> ($0.15 / $0.60 per 1M) - so the run can finish on the cheaper model instead of failing.</p></article>
+                  <article class="p-card p-cta" data-a><span class="p-tag">See it live</span><p>Every tier card shows the formula, the decision and the full trace.</p><div class="p-cta-btns"><button class="btn primary" type="button" data-goto="proof"><span>Run the Budget Proof →</span></button><button class="btn" type="button" data-goto="governance"><span>TokenOps console →</span></button></div></article>
+                </div>
+              </div>
+            </section>
+
+            <!-- 14 · Takeaways -->
+            <section class="p-slide" data-title="Takeaways">
+              <header class="p-head">
+                <span class="p-kick" data-a>13 · Takeaways</span>
+                <h2 class="p-title" data-a>Manage AI like an investment - <em>at three speeds.</em></h2>
+              </header>
+              <div class="p-body p-close">
+                <div class="p-card" data-a>
+                  <table class="p-table p-take">
+                    <thead><tr><th>Stage</th><th>Capability</th><th>Takeaway</th></tr></thead>
+                    <tbody>
+                      <tr><td rowspan="3"><b>1 · Govern spend</b></td><td>Visibility</td><td>You can't manage what you can't see.</td></tr>
+                      <tr><td>Control</td><td>Use-case-aware caps - and watch the whales.</td></tr>
+                      <tr><td>Analytics</td><td>If the insight isn't out of the box, pipe it to Power BI.</td></tr>
+                      <tr><td><b>2 · Measure value</b></td><td>Outcomes &amp; evals</td><td>Tag AI use with business outcomes and quality thresholds.</td></tr>
+                      <tr><td rowspan="2"><b>3 · Optimize</b></td><td>Optimization</td><td>Model choice - plus context, caching and tools.</td></tr>
+                      <tr><td>Forecasting</td><td>Forecast to buy baseload at a discount.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <aside class="p-card p-next" data-a>
+                  <span class="p-tag">Next steps</span>
+                  <ol>
+                    <li><b>Instrument</b><span>wrap every LLM call and tool crossing</span></li>
+                    <li><b>Attribute</b><span>tag runs by persona, department and use case</span></li>
+                    <li><b>Enforce</b><span>per-run budget, pre-call worst case, steer before halt</span></li>
+                    <li><b>Measure</b><span>evals and ROI per business outcome</span></li>
+                    <li><b>Optimize</b><span>Model Router, Foundry IQ, caching, PTU</span></li>
+                  </ol>
+                </aside>
+              </div>
+              <p class="p-punch" data-a>Thank you. <b>Turn tokens into outcomes - by design, not by invoice.</b></p>
+            </section>
+
+            <div class="p-foot"><span>Tokenomics · FinSight × TokenOps</span><span id="sfSection">Tokenomics</span><span id="sfNum">01 / 14</span></div>
+            <i class="p-prog" id="deckProgress"></i>
+          </div>
+        </div>
+        <div class="deck-bar glass">
+          <button class="icon-btn" id="deckPrev" type="button" title="Previous slide (←)" aria-label="Previous slide"><span>‹</span></button>
+          <div class="deck-dots" id="deckDots"></div>
+          <button class="icon-btn" id="deckNext" type="button" title="Next slide (→)" aria-label="Next slide"><span>›</span></button>
+          <small class="deck-count" id="deckCount">1 / 14</small>
+          <i class="deck-sep"></i>
+          <button class="btn small" type="button" data-annot-toggle aria-pressed="false" title="Draw on anything on screen (A)"><span>✎ Annotate</span></button>
+          <button class="btn small" type="button" data-annot-clear title="Clear annotations on this slide (C)"><span>Clear</span></button>
+          <button class="btn small" id="deckPresent" type="button" title="Present full screen (F)"><span>⛶ Present</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- run detail modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card glass wide" role="dialog" aria-modal="true" aria-label="Run trace">
+      <button class="modal-close" id="modalClose" aria-label="Close"><span>×</span></button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer glass">
+    <span>CREATED BY</span><span class="sep">|</span><span>CHINMOY C.</span>
+  </footer>
+
+  <!-- screen annotation (works on every page) -->
+  <canvas class="annot-canvas" id="annotCanvas" aria-hidden="true"></canvas>
+  <div class="annot-bar glass" id="annotBar" role="toolbar" aria-label="Annotation tools">
+    <span class="annot-lbl">Annotate</span>
+    <button type="button" class="on" data-tool="pen" title="Pen (P)"><span>✎ Pen</span></button>
+    <button type="button" data-tool="hl" title="Highlighter (H)"><span>▍ Highlight</span></button>
+    <i></i>
+    <button type="button" class="sw on" data-color="#fbbf24" style="--c:#fbbf24" title="Amber" aria-label="Amber"></button>
+    <button type="button" class="sw" data-color="#fb7185" style="--c:#fb7185" title="Rose" aria-label="Rose"></button>
+    <button type="button" class="sw" data-color="#22d3ee" style="--c:#22d3ee" title="Cyan" aria-label="Cyan"></button>
+    <button type="button" class="sw" data-color="#34d399" style="--c:#34d399" title="Green" aria-label="Green"></button>
+    <button type="button" class="sw" data-color="#a855f7" style="--c:#a855f7" title="Violet" aria-label="Violet"></button>
+    <i></i>
+    <button type="button" data-annot-undo title="Undo (Ctrl+Z)"><span>↶ Undo</span></button>
+    <button type="button" data-annot-clear title="Clear this screen (C)"><span>Clear</span></button>
+    <i class="nav-only"></i>
+    <button type="button" class="nav-only" data-deck="-1" title="Previous slide (←)" aria-label="Previous slide"><span>‹</span></button>
+    <button type="button" class="nav-only" data-deck="1" title="Next slide (→)" aria-label="Next slide"><span>›</span></button>
+    <i></i>
+    <button type="button" class="done" data-annot-toggle title="Stop annotating (Esc)"><span>Done</span></button>
+  </div>
+</body>
+</html>

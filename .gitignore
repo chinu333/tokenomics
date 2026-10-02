@@ -1,0 +1,6 @@
+tokenops/
+__pycache__/
+*.pyc
+.env
+data/tokenops/
+logs/
